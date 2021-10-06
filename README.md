@@ -36,6 +36,11 @@ Redigera ```config/config.json```
 },
 ```
 
+Har du klonat detta repo och behöver en config.
+```bash
+npx sequelize-cli init:config
+```
+
 # Model/Migration
 
 Notera att tag är inte jättebäst och kommer faila normalisering. Vi får fixa det senare.
