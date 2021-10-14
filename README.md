@@ -1,6 +1,6 @@
 # Node + express + sequelize
 
-Började med  denna [tutorial](https://stackabuse.com/using-sequelize-orm-with-nodejs-and-express/) 
+Jag började med denna [tutorial](https://stackabuse.com/using-sequelize-orm-with-nodejs-and-express/) 
 men som författaren skriver så bör Migrations användas.
 Därför + [migrations](https://sequelize.org/v6/manual/migrations.html) från sequelize manualen.
 
@@ -39,6 +39,37 @@ Redigera ```config/config.json```
 Har du klonat detta repo och behöver en config.
 ```bash
 npx sequelize-cli init:config
+```
+
+## Alternativ lösning (bättre)
+
+Döp om ```config.json``` till ```config.js```.
+Installera dotenv, ```npm i dotenv```
+
+Det går nu att använda dotenv för att dölja uppgifter i config.js vilket tar bort behovet av att ```.gitingore``` filen.
+Ladda bara inte upp ```.env``` filen till GitHub.
+
+Det är viktigt att ha med ```require('dotenv').config();``` i ```config.js``` eftersom ```npx sequelize``` kommandon inte laddar app.js.
+```js
+require('dotenv').config();
+
+module.exports = {
+    development: {
+        storage: 'database.sqlite',
+        dialect: 'sqlite'
+    },
+    test: {
+        storage: 'database.test.sqlite',
+        dialect: 'sqlite'
+    },
+    production: {
+        username: process.env.DB_USER || '',
+        password: process.env.DB_PASSWORD || '',
+        database: process.env.DB_NAME || '',
+        host: process.env.DB_HOST || '',
+        dialect: 'postgres'
+    }
+};
 ```
 
 # Model/Migration
@@ -142,6 +173,38 @@ Provkör med [Thunder client](https://marketplace.visualstudio.com/items?itemNam
 Surfa till localhost:3000/notes
 
 👍
+
+[En collection för att testa samliga routes är inkluderad i detta repo](./thunder-collection_notes.json).
+
+# Tester
+
+För att automatisera tester används jest och supertest.
+```npm i --save-dev jest supertest```
+
+```bash
+mkdir __tests__
+touch __tests__/test.js
+```
+
+Skapa ett första test i ```test.js```.
+```js
+test('two plus two is four', () => {
+    expect(2 + 2).toBe(4);
+});
+```
+
+Redigera ```package.json``` och skapa ett script för att köra alla tester.
+```json
+"scripts": {
+    "test": "jest"
+},
+```
+
+Kör alla test med ```npm run test``` alternativt så kör ```npx jest```.
+
+Notera att jest/supertest ska vara smart nog att köra på test databasen från sequelize config.
+Ditt nästa steg är att kolla in ```server.test.js``` filen i __test__ mappen.
+Där finns samtliga tester för projektet.
 
 # Routes
 
