@@ -61,3 +61,4 @@ typings/
 .next
 
 database.sqlite
+database.test.sqlite
