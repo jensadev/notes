@@ -5,10 +5,21 @@ men som författaren skriver så bör Migrations användas.
 Därför + [migrations](https://sequelize.org/v6/manual/migrations.html) från sequelize manualen.
 
 Koden finns i repot, instruktionerna här.
-Första steget är att få det att funka och använda sqlite.
+
+### Speedrun
+
+```bash
+git clone https://github.com/jensnti/notes.git
+cd notes
+npm i
+npx sequelize db:migrate
+npm test
+npm start
+```
 
 # Setup
 
+Första steget är att få det att funka och använda sqlite.
 ```bash
 npm install sequelize sequelize-cli sqlite3
 ```
@@ -83,6 +94,8 @@ Enligt sequelize manualen gör detta följande:
 
 * Create a model file user in models folder
 * Create a migration file with name like XXXXXXXXXXXXXX-create-user.js in migrations folder
+
+För att migrera databasen så kör: ```npx sequelize db:migrate```
 
 # Seed
 
