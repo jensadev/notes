@@ -178,6 +178,9 @@ Surfa till localhost:3000/notes
 
 # Tester
 
+Kolla [här](https://dev.to/mhmdlotfy96/testing-nodejs-express-api-with-jest-and-supertest-1bk0)
+ och i [jest manualen](https://jestjs.io/docs/getting-started).
+ 
 För att automatisera tester används jest och supertest.
 ```npm i --save-dev jest supertest```
 
